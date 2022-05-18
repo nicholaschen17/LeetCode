@@ -1,0 +1,89 @@
+/*
+ * Filename: ValidParenTheses.cpp
+ * Contains: Implementation of isValid function from LeetCode
+ * Part of: LeetCode Problem #20 
+ *
+ */
+ 
+
+ // First solution was due to an error in reading the LeetCode spec sheet but works for opening 
+ // and closing brackets not being closed in the correct order
+ // Second solution is the correct solution that passes all of the LeetCode tests
+
+
+/* Solution #1 (opening and closing brackets not closed in correct order)
+*  Time Complexity: O(n) due to iterating through the whole string
+*  Space Complexity: O(1) due to constant memory usage
+*  Runtime: Unknown (Did not pass all tests so LeetCode did not give a result)
+*  Memory: Unknown (Did not pass all tests so LeetCode did not give a result)
+*/
+class Solution {
+public:
+    bool isValid(string s) {
+        
+        // Check if there are an odd number of parentheses 
+        if (s.length() % 2 != 0) {
+            return false;
+        }
+
+        // LIFO structure: Stack 
+        stack<char> parenStack;
+        for (int i = 0; i < s.length(); i++) {
+            if (s[i] == '[' or s[i] == '(' or s[i] == '{') {
+                parenStack.push(s[i]);
+            } else {
+                if (parenStack.top() == '(' and s[i] != ')') {
+                    return false;
+                } else if (parenStack.top() == '{' and s[i] != '}') {
+                    return false;
+                } else if (parenStack.top() == '[' and s[i] != ']') {
+                    return false;
+                } else {
+                    parenStack.pop();
+                    break;
+                }
+            }
+        }
+        
+        return true;
+    }
+};
+
+
+/* Solution #2 (opening and closing brackets closed in correct order)
+*  Time Complexity: O(n) due to iterating through the whole string
+*  Space Complexity: O(1) due to pushing and popping off the stack
+*  Runtime: 0ms
+*  Memory: 6.2mb
+*/
+class Solution {
+public:
+    bool isValid(string s) {
+        
+        // Check if there are an odd number of parentheses 
+        if (s.length() % 2 != 0) {
+            return false;
+        }
+
+        // LIFO structure: Stack 
+        stack<char> parenStack;
+        for (int i = 0; i < s.length(); i++) {
+            if (s[i] == '[' or s[i] == '(' or s[i] == '{') {
+                parenStack.push(s[i]);
+            } else {
+                if (parenStack.top() == '(' and s[i] != ')') {
+                    return false;
+                } else if (parenStack.top() == '{' and s[i] != '}') {
+                    return false;
+                } else if (parenStack.top() == '[' and s[i] != ']') {
+                    return false;
+                } else {
+                    parenStack.pop();
+                    break;
+                }
+            }
+        }
+        
+        return true;
+    }
+};
