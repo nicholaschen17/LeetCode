@@ -1,0 +1,74 @@
+/*
+ * Filename: AddTwoNum.cpp
+ * Contains: Implementation of AddTwoNum function from LeetCode
+ * Part of: LeetCode Problem #2 
+ *
+ */
+ 
+ // First solution was a brute force solution which simply checked for all 
+ // possibilities and accounted for them with if statements
+ 
+ /* Solution #1 (Brute Force)
+*  Time Complexity: 
+*  Space Complexity: 
+*  Runtime: 74ms 
+*  Memory: 71.4mb
+*/
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        int overflow = 0;
+        ListNode* p = l1; 
+        ListNode* q = l2;
+        ListNode* curr = nullptr; 
+        ListNode* root = nullptr;
+        
+        while (p != nullptr or q != nullptr) {
+            int x = 0, y = 0;
+            
+            if (p != nullptr) {
+                x = p->val;
+                p = p->next;
+            }
+            
+            if (q != nullptr) {
+                y = q->val;
+                q = q->next;
+            }
+            
+            int sum = x + y + overflow;
+            int insertedVal;
+            
+            if (sum < 10) {
+                overflow = 0;
+                insertedVal = sum;
+            } else {
+                insertedVal = sum % 10;
+                overflow = sum / 10;
+            }
+            
+            ListNode* newNode = new ListNode(insertedVal);
+            if (curr == nullptr) {
+                curr = newNode;
+                root = newNode;
+            } else {
+                curr->next = newNode;
+                curr = newNode;
+            }            
+        }
+        
+        if (overflow == 1) {
+            ListNode* newNode = new ListNode(1);
+            curr->next = newNode;
+        }
+        
+        return root;
+    }
+};
+
+ /* Solution #2 (Algorithm)
+*  Time Complexity: 
+*  Space Complexity: 
+*  Runtime: 
+*  Memory: 
+*/
